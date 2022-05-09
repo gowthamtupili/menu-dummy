@@ -28,7 +28,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-
+app.get('/', async (req, res) => {
+    const items = await Item.find({});
+    res.render('menu/items', { items });
+})
 
 app.all('*', (req,res) => {
     res.send('Page Not Found');
