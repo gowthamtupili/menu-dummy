@@ -1,0 +1,26 @@
+{
+  "name": "qr-menu",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gowthamtupili/menu-dummy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gowthamtupili/menu-dummy/issues"
+  },
+  "homepage": "https://github.com/gowthamtupili/menu-dummy#readme",
+  "dependencies": {
+    "ejs": "^3.1.7",
+    "ejs-mate": "^4.0.0",
+    "express": "^4.18.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.3.2"
+  }
+}
