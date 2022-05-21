@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Item = require('../models/item');
 
-// 'mongodb://localhost:27017/qr-scanner'
-mongoose.connect('mongodb+srv://gowtham:qrmenu@cluster0.tehxb.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb://localhost:27017/qr-scanner')
     .then(() => {
         console.log("Connection OPEN!!!");
     })
