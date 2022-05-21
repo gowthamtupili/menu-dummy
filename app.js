@@ -8,7 +8,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
-
+const catchAsync = require('./utils/catchAsync')
 
 const Item = require('./models/item');
 
@@ -35,11 +35,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
-app.get('/', async (req, res) => {
+app.get('/', catchAsync(async (req, res) => {
     const items = await Item.find({});
     // res.render('menu/items', { items });
     res.send(items);
-})
+}))
+
+app.post('/item', catchAsync(async (req, res) => {
+    const newItem = new Item(req.body);
+    await newItem.save()
+    res.redirect('/')
+}))
+
+app.patch('item/:id', catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const item = await Item.findByIdAndUpdate(id, req.body, {runValidators: true, new: true});
+    await item.save();
+    res.redirect('/')
+}))
+
+app.delete('item/:id', catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await Item.findByIdAndDelete(id);
+    res.redirect('/');
+}))
 
 app.all('*', (req,res) => {
     res.send('Page Not Found');
