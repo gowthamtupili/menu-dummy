@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { places, descriptors } = require('./seedHelpers');
 const Item = require('../models/item');
 
-mongoose.connect('mongodb://localhost:27017/qr-scanner')
+// 'mongodb://localhost:27017/qr-scanner'
+mongoose.connect('mongodb+srv://gowtham:qrmenu@cluster0.tehxb.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
         console.log("Connection OPEN!!!");
     })
@@ -18,15 +18,17 @@ mongoose.connect('mongodb://localhost:27017/qr-scanner')
 const seedDB = async () => {
     await Item.deleteMany({});
     for (let i = 0; i < 20; i++) {
-        // const random1000 = Math.floor(Math.random() * 1000);
-        const price = (Math.floor(Math.random() * 30) + 10);
+        const cost = (Math.floor(Math.random() * 30) + 10);
         const menu = new Item({
-            author: 'tdjfhg',
-            // location: `${cities[random1000].city}, ${cities[random1000].state}`,
-            title: `${sample(descriptors)} ${sample(places)}`,  
+            name: 'biryani',  
             image: 'https://source.unsplash.com/collection/483251',
             description: ' Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima vero quasi, recusandae iste, quibusdam quam sed numquam error ea provident a, architecto id. A eius perspiciatis minus obcaecati quos vel?',
-            price,
+            cost,
+            discount: 0,
+            category: 'a',
+            type: 'Non-Veg',
+            is_available: true,
+            serves: 'Serves 2'
            
         })
         await menu.save();

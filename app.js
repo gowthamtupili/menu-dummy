@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -9,8 +14,10 @@ const Item = require('./models/item');
 
 const app = express();
 
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/qr-scanner';
 
-mongoose.connect('mongodb://localhost:27017/qr-scanner')
+
+mongoose.connect(dbUrl)
     .then(() => {
         console.log("Database Connected!!!");
     })
@@ -30,7 +37,8 @@ app.use(methodOverride('_method'));
 
 app.get('/', async (req, res) => {
     const items = await Item.find({});
-    res.render('menu/items', { items });
+    // res.render('menu/items', { items });
+    res.send(items);
 })
 
 app.all('*', (req,res) => {
@@ -38,7 +46,7 @@ app.all('*', (req,res) => {
 })
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 9000;
 app.listen(port, () => {
     console.log(`Serving on port ${port}`)
 })
