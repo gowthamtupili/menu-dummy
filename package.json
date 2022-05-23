@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/gowthamtupili/menu-dummy#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.7",
     "ejs-mate": "^4.0.0",

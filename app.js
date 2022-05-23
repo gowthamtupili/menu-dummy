@@ -8,6 +8,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const methodOverride = require('method-override');
+var cors = require("cors");
 const catchAsync = require('./utils/catchAsync')
 
 const Item = require('./models/item');
@@ -34,6 +35,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(cors());
 
 app.get('/', catchAsync(async (req, res) => {
     const items = await Item.find({});
