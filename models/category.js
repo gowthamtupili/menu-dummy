@@ -8,13 +8,19 @@ const ItemSchema = new Schema({
     discount: Number,
     is_available: Boolean,
     category: String,
-    type: String,
+    veg_or_not: String,
     image: String,
     serves: String,
+});
+
+
+const CategorySchema = new Schema({
+  category: String,
+  items: [ItemSchema],  
 })
 
 
-module.exports = mongoose.model('Item', ItemSchema);
+module.exports = mongoose.model('Category', CategorySchema);
 
 
 

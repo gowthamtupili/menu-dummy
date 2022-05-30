@@ -11,7 +11,8 @@ const methodOverride = require('method-override');
 var cors = require("cors");
 const catchAsync = require('./utils/catchAsync')
 
-const Item = require('./models/item');
+const Category = require('./models/category');
+const Restaurant = require('./models/restaurant');
 
 const app = express();
 
@@ -38,9 +39,12 @@ app.use(methodOverride('_method'));
 app.use(cors());
 
 app.get('/', catchAsync(async (req, res) => {
-    const items = await Item.find({});
+    const rest = await Restaurant.findById('6294348e6d6b52ba81f87536').populate(
+        'menu'
+    );
+
     // res.render('menu/items', { items });
-    res.send(items);
+    res.json(rest);
 }))
 
 app.post('/item', catchAsync(async (req, res) => {
