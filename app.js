@@ -53,7 +53,7 @@ app.post('/item', catchAsync(async (req, res) => {
     res.redirect('/')
 }))
 
-app.patch('item/:id', catchAsync(async (req, res) => {
+app.patch('/item/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
     const item = await Item.findByIdAndUpdate(id, req.body, {runValidators: true, new: true});
     await item.save();
